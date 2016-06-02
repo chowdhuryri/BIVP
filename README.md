@@ -1,3 +1,3 @@
 # BIVP
-Bivariate Poisson PDF
-Calculate Joint Probability using Bivariate Poisson Distribution
+A shiny app to
+calculate Joint Probability using Bivariate Poisson Distribution
