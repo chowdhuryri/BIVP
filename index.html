@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bivariate Poisson Distribution (Marginal/Conditional Approach)</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Bivariate Poisson Distribution (Marginal/Conditional Approach)">
+  <meta name="author" content="Rafiqul Chowdhury">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Bivariate Poisson Distribution (Marginal/Conditional Approach)</h1>
+    <h2>Reproducible Pitch Presentation- DDP Course Project</h2>
+    <p>Rafiqul Chowdhury<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Paired Count Data</h2>
+  </hgroup>
+  <article data-timings="">
+    <p class=''>Correlated count data are generated from various fields. For example,</p>
+
+<ul>
+<li>Number of accidents and fatalities</li>
+<li>Number of episodes of depression and number of visits to doctors</li>
+<li>Number of sales of different products</li>
+</ul>
+
+<p class=''>Leiter and Hamadan (1973) suggested following bivariate probability 
+models.
+\[g(y_1,y_2)=\frac{e^{-\lambda_1}\lambda_1^{y_1} e^{-\lambda_2 y_1}{(\lambda_2 y_1)}^{y_2}}{y_1! y_2!},\mbox{ } y_1 =0,1,...;\mbox{ } y_2=0,1,...;\mbox{ }\lambda_1, \mbox{ }\lambda_2 > 0.\] </p>
+
+<p class=''>Observed data may not cover the full range as the 
+theoretical range above. </p>
+
+<p class=''>This produces right truncation for both the variables. </p>
+
+<p class=''>Therefore, the total probability may not sum to one.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Total Probability Calculation from simulated data</h2>
+  </hgroup>
+  <article data-timings="">
+    <p class=''>Following r code chunk calculate total probability using bivariate pdf.</p>
+
+<p class=''>In following code Y1 and Y2 values are 0 to 14 and lambda1 = 0.76 
+and lambda2 = 3.5.</p>
+
+<pre><code class="r">library(slidifyLibraries)
+
+mypdf&lt;-function(y1,y2,l1,l2){
+mymat&lt;-matrix(0,y1+1,y2+1)
+  for (i in 0:y1){
+     for (j in 0:y2){mymat[i,j]&lt;-(exp(-l1)*l1^i/factorial(i)) * (exp(-l2*i)*(l2*i)^j/factorial(j))  
+            }  
+  } 
+mymat
+}
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Codes</h2>
+  </hgroup>
+  <article data-timings="">
+    <p class=''>Total probability for different combinations of Y1, Y2, lambda1 and
+lambda2 values.</p>
+
+<pre><code class="r">cat(&quot;Y1 = &quot;,y11,&quot;,&quot;,&quot;Y2 = &quot;,y21,&quot;,&quot;,&quot;l1 = &quot;,l11,&quot;,&quot;,&quot;l2 = &quot;,l21,&quot;,&quot;,&quot;Total Prob. = &quot;, sum(mypdf(y11,y21,l11,l21)),&quot;\n&quot;)    
+</code></pre>
+
+<p>Y1 =  5 , Y2 =  5 , l1 =  2.06 , l2 =  1.19 , Total Prob. =  0.650547 </p>
+
+<pre><code class="r">cat(&quot;Y1 = &quot;,y12,&quot;,&quot;,&quot;Y2 = &quot;,y22,&quot;,&quot;,&quot;l1 = &quot;,l12,&quot;,&quot;,&quot;l2 = &quot;,l22,&quot;,&quot;,&quot;Total Prob. = &quot;, sum(mypdf(y12,y22,l12,l22)),&quot;\n&quot;)  
+</code></pre>
+
+<p>Y1 =  9 , Y2 =  7 , l1 =  3.94 , l2 =  0.96 , Total Prob. =  0.8121686 </p>
+
+<pre><code class="r">cat(&quot;Y1 = &quot;,y13,&quot;,&quot;,&quot;Y2 = &quot;,y23,&quot;,&quot;,&quot;l1 = &quot;,l13,&quot;,&quot;,&quot;l2 = &quot;,l23,&quot;,&quot;,&quot;Total Prob. = &quot;, sum(mypdf(y13,y23,l13,l23)),&quot;\n&quot;) 
+</code></pre>
+
+<p>Y1 =  15 , Y2 =  15 , l1 =  3.94 , l2 =  0.96 , Total Prob. =  0.9111765 </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Conclusions</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><strong>Conclusions:</strong></p>
+
+<ul>
+<li>Right truncation should be considered in analyzing count data.</li>
+<li>Adapting right truncated models would provide more refined estimates.</li>
+</ul>
+
+<p><strong>References:</strong></p>
+
+<p>Leiter RE and Hamdan MA. Some Bivariate Probability Models Applicable to 
+Traffic Accidents and Fatalities. (1973), International Statistical Review,
+41(1): 87-100.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Paired Count Data'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Total Probability Calculation from simulated data'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Codes'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Conclusions'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
