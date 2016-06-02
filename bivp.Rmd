@@ -1,0 +1,33 @@
+# <center> Bivariate Poisson PDF: A Shiny App <center>
+### <center> Rafiqul Chowdhury <center>
+
+**Overview**
+
+The bivariate Poisson models have emerged to address a wide range of 
+applications in various fields where paired count data are correlated. 
+Leiter and Hamadan (1973) suggested bivariate probability models applicable 
+to traffic accidents and fatalities. The bivariate Poisson distribution has 
+been developed following various assumptions. Among those, the most 
+comprehensive one has been proposed by Kocherlakota and Kocherlakota (1992). 
+Islam and Chowdhury (2015) proposed bivariate Poisson model for covariate 
+dependence based on the extended generalized linear model.
+
+In practice, we may not observe the full range of outcomes as the theoretical 
+range of outcomes has no upper limits. This right truncation may occur for 
+both the variables due to restrictions in the definition of the outcome 
+variables. Therefore, the total probability may not sum to one. 
+
+A shiny application is developed to compute the probability of both events
+based on different ranges of two outcomes and corresponding parameter values. An  interactive 3D graphics of pdf is also produced **(Click on the graph area to see the graph. It takes a while from shiny server to generate the graph).** This shiny application would help to understand the right truncation. 
+
+
+**References**
+
+Islam, M. A. and Chowdhury, R.I. (2015). A Bivariate Poisson Model with 
+Covariate Dependence. *Bulletin of the Calcutta Mathematical Society*, 107(1), 11-20.
+
+Kocherlakota S. and Kocherlakota, K. (1992). *Bivariate Discrete Distributions*. Marcel Dekker, New York.
+
+Leiter, R. E. and Hamdan, M. A. Some Bivariate Probability Models Applicable to 
+Traffic Accidents and Fatalities. (1973), *International Statistical Review*, 41(1): 87-100.
+
